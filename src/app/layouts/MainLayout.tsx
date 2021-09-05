@@ -5,7 +5,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="page">
       <Head>
-        <title>Divine Roles</title>
+        <title>The Ancients</title>
         <link href="/static/icon.png" rel="shortcut icon" />
       </Head>
       {children}

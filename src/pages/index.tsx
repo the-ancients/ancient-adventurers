@@ -13,8 +13,8 @@ const IndexPage = () => {
   };
   return (
     <>
-      <h1>Divine Roles</h1>
-      <div className="message">You must have Divine Robes to enter.</div>
+      <h1>The Ancients</h1>
+      <div className="message">You must have an Ancient Helm to enter.</div>
       {!account ? (
         <>
           <button
@@ -40,10 +40,10 @@ const IndexPage = () => {
           >
             Connect Wallet
           </button>
-          <a href="https://robes.market/">Buy Divine Robes at robes.market →</a>
+          <a href="https://ancients.market/">Buy Ancient Helms at ancients.market →</a>
         </>
       ) : (
-        <button onClick={verifyAndJoin}>Verify your Divine Role</button>
+        <button onClick={verifyAndJoin}>Verify your Ancient Helm</button>
       )}
       <style jsx global>{`
         .walletconnect-qrcode__base {

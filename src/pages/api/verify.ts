@@ -13,11 +13,14 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
   const verified =
     account.toLowerCase() ==
     utils.verifyMessage(SIGNATURE_TEXT, signature).toLowerCase();
+
+  console.log(verified);
   if (verified) {
     const bags = await getBagsInWallet(account.toLowerCase());
     const filteredBags = bags.filter(bag =>
-      bag.chest.toLowerCase().includes('divine robe')
+      bag.head.toLowerCase().includes('ancient')
     );
+    console.log(filteredBags);
     if (filteredBags.length > 0) {
       let [user] = await prisma.user.findMany({
         where: { address: account.toLowerCase() }

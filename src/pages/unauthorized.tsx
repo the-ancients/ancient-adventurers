@@ -3,9 +3,9 @@ import React from 'react';
 const UnauthorizedPage = () => {
   return (
     <>
-      <h1>Divine Roles</h1>
+      <h1>The Ancients</h1>
       <div className="message">
-        Sorry - there's a dress code. Divine Robe wearers only.
+        Sorry - You must acquire an Ancient Helm to join.
       </div>
     </>
   );

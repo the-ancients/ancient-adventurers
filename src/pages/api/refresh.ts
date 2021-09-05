@@ -25,18 +25,18 @@ const api: NextApiHandler = async (_req, res) => {
   for (const user of usersToRefresh) {
     const bags = await getBagsInWallet(user.address.toLowerCase());
     const filteredBags = bags.filter(bag =>
-      bag.chest.toLowerCase().includes('divine robe')
+      bag.head.toLowerCase().includes('ancient')
     );
     console.log(
       `${user.username} ${user.address} has ${
         filteredBags.length
-      } robes: (${filteredBags.map(bag => bag.chest).join(', ')})`
+      } ancients: (${filteredBags.map(bag => bag.head).join(', ')})`
     );
     if (filteredBags.length == 0) {
       console.log('Should kick', user.username);
       await prisma.user.update({
         where: { id: user.id },
-        data: { lastChecked: new Date(), inServer: false, robes: [] }
+        data: { lastChecked: new Date(), inServer: false, ancients: [] }
       });
       try {
         console.log(`Removing ${user.username} from server`);
@@ -50,12 +50,12 @@ const api: NextApiHandler = async (_req, res) => {
         data: {
           lastChecked: new Date(),
           inServer: true,
-          robes: filteredBags.map(bag => bag.chest)
+          ancients: filteredBags.map(bag => bag.head)
         }
       });
       if (user.discordId && user.inServer) {
         const newRoleIds = filteredBags
-          .map(bag => bag.chest)
+          .map(bag => bag.head)
           .map(name => RolesToIDs[name]);
         const { roles: existingRoleIds }: { roles: string[] } =
           await getRolesForUser(user.discordId);
