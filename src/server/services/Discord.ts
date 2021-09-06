@@ -14,6 +14,9 @@ export const getProfile = async (
   return user;
 };
 
+//const USE_LOCAL = false;
+const USE_LOCAL = true;
+
 export const getAccessToken = async (code: string) => {
   const body = {
     client_id: process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID,
@@ -137,7 +140,7 @@ export const removeRoleForUser = async (roleId: string, userID: string) => {
 };
 
 export const RolesToIDs: Record<string, string> = {
-  'Divine Robe': '881425623833276506',
+  'Ancient Helm': '884256511008854036',
   'Divine Robe of Power': '881425733443014667',
   'Divine Robe of Detection': '881425780578590741',
   'Divine Robe of Perfection': '881425839076573185',

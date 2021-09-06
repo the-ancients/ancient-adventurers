@@ -17,6 +17,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
   console.log(verified);
   if (verified) {
     const bags = await getBagsInWallet(account.toLowerCase());
+    //console.log('bags', bags);
     const filteredBags = bags.filter(bag =>
       bag.head.toLowerCase().includes('ancient')
     );
@@ -25,6 +26,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
       let [user] = await prisma.user.findMany({
         where: { address: account.toLowerCase() }
       });
+      console.log(user);
       if (!user) {
         user = await prisma.user.create({
           data: { address: account.toLowerCase() }
