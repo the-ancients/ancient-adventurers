@@ -32,49 +32,51 @@ const api: NextApiHandler = async (_req, res) => {
         filteredBags.length
       } ancients: (${filteredBags.map(bag => bag.head).join(', ')})`
     );
-    if (filteredBags.length == 0) {
-      console.log('Should kick', user.username);
-      await prisma.user.update({
-        where: { id: user.id },
-        data: { lastChecked: new Date(), inServer: false, ancients: [] }
-      });
-      try {
-        console.log(`Removing ${user.username} from server`);
-        await removeFromServer(user.discordId as string);
-      } catch (err) {
-        console.log(err);
+
+    // Do not kick users that have not entered through this gate. 
+    // if (filteredBags.length == 0) {
+    //   console.log('Should kick', user.username);
+    //   await prisma.user.update({
+    //     where: { id: user.id },
+    //     data: { lastChecked: new Date(), inServer: false, ancients: [] }
+    //   });
+    //   try {
+    //     console.log(`Removing ${user.username} from server`);
+    //     await removeFromServer(user.discordId as string);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // } 
+    
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        lastChecked: new Date(),
+        inServer: true,
+        ancients: filteredBags.map(bag => bag.head)
       }
-    } else {
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          lastChecked: new Date(),
-          inServer: true,
-          ancients: filteredBags.map(bag => bag.head)
-        }
-      });
-      if (user.discordId && user.inServer) {
-        const newRoleIds = filteredBags
-          .map(bag => bag.head)
-          .map(name => RolesToIDs[name]);
-        const { roles: existingRoleIds }: { roles: string[] } =
-          await getRolesForUser(user.discordId);
-        const toRemove =
-          existingRoleIds?.filter(x => !newRoleIds?.includes(x)) || [];
-        const toAdd =
-          newRoleIds?.filter(x => !existingRoleIds?.includes(x)) || [];
-        for (const roleId of toRemove) {
-          if (roleId == AdminRoleID) continue;
-          await new Promise(resolve => setTimeout(resolve, 100));
-          console.log('Removing role for user', roleId, user.discordId);
-          await removeRoleForUser(roleId, user.discordId);
-        }
-        for (const roleId of toAdd) {
-          if (roleId == AdminRoleID) continue;
-          await new Promise(resolve => setTimeout(resolve, 100));
-          console.log('Adding role for user', roleId, user.discordId);
-          await addRoleForUser(roleId, user.discordId);
-        }
+    });
+    if (user.discordId && user.inServer) {
+      const newRoleIds = filteredBags
+        .map(bag => bag.head)
+        .map(name => RolesToIDs[name]);
+      const { roles: existingRoleIds }: { roles: string[] } =
+        await getRolesForUser(user.discordId);
+      const toRemove =
+        existingRoleIds?.filter(x => !newRoleIds?.includes(x)) || [];
+      const toAdd =
+        newRoleIds?.filter(x => !existingRoleIds?.includes(x)) || [];
+      for (const roleId of toRemove) {
+        if (roleId == AdminRoleID) continue;
+        await new Promise(resolve => setTimeout(resolve, 100));
+        console.log('Removing role for user', roleId, user.discordId);
+        await removeRoleForUser(roleId, user.discordId);
+      }
+      for (const roleId of toAdd) {
+        if (roleId == AdminRoleID) continue;
+        await new Promise(resolve => setTimeout(resolve, 100));
+        console.log('Adding role for user', roleId, user.discordId);
+        await addRoleForUser(roleId, user.discordId);
       }
     }
   }
