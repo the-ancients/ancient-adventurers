@@ -139,22 +139,22 @@ export const removeRoleForUser = async (roleId: string, userID: string) => {
 
 export const RolesToIDs: Record<string, string> = {
   'Ancient Helm': '884256511008854036',
-  'Divine Robe of Power': '881425733443014667',
-  'Divine Robe of Detection': '881425780578590741',
-  'Divine Robe of Perfection': '881425839076573185',
-  'Divine Robe of Reflection': '881425866977079346',
-  'Divine Robe of Fury': '881425900963528714',
-  'Divine Robe of Vitriol': '881425925919604737',
-  'Divine Robe of Rage': '881425956395446272',
-  'Divine Robe of the Fox': '881425974288326676',
-  'Divine Robe of Skill': '881425995024973834',
-  'Divine Robe of Brilliance': '881426015262490654',
-  'Divine Robe of Titans': '881426035642626048',
-  'Divine Robe of Protection': '881426056974843914',
-  'Divine Robe of Enlightenment': '881426082497179659',
-  'Divine Robe of the Twins': '881426115959349269',
-  'Divine Robe of Anger': '881426135961980979',
-  'Divine Robe of Giants': '881427638386827274'
+  'Ancient Helm of Detection': '884237145852760095',
+  'Ancient Helm of Enlightenment': '884437793416306799',
+  'Ancient Helm of Skill': '884437339244478565',
+  'Ancient Helm of Giants': '884437886882156544',
+  'Ancient Helm of Brilliance': '884437926346371122',
+  'Ancient Helm of Anger': '884437960148271174',
+  'Ancient Helm of the Fox': '884437998127710249',
+  'Ancient Helm of Reflection': '884438045892419654',
+  'Ancient Helm of Titans': '884438084312264734',
+  'Ancient Helm of Power': '884438126800551997',
+  'Ancient Helm of Vitriol': '884438178390507590',
+  'Ancient Helm of Protection': '884438216093085766',
+  'Ancient Helm of Perfection': '884438328869543986',
+  'Ancient Helm of the Twins': '884438252910702602',
+  'Ancient Helm of Fury': '884438288369319976',
+  'Ancient Helm of Rage': '884438322573901844'
 };
 
-export const AdminRoleID = '881277625820127232';
+export const AdminRoleID = '884439692676857917';
