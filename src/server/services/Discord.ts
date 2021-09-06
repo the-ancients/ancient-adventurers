@@ -158,3 +158,4 @@ export const RolesToIDs: Record<string, string> = {
 };
 
 export const AdminRoleID = '882448562758246451';
+export const BuilderRoleID = '884143420266938481';

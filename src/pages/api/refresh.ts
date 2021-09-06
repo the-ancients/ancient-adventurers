@@ -2,6 +2,7 @@ import prisma from '@server/helpers/prisma';
 import {
   addRoleForUser,
   AdminRoleID,
+  BuilderRoleID,
   getRolesForUser,
   removeRoleForUser,
   RolesToIDs
@@ -66,7 +67,7 @@ const api: NextApiHandler = async (_req, res) => {
       const toAdd =
         newRoleIds?.filter(x => !existingRoleIds?.includes(x)) || [];
       for (const roleId of toRemove) {
-        if (roleId == AdminRoleID) continue;
+        if (roleId == AdminRoleID || roleId == BuilderRoleID) continue;
         await new Promise(resolve => setTimeout(resolve, 100));
         console.log('Removing role for user', roleId, user.discordId);
         await removeRoleForUser(roleId, user.discordId);
