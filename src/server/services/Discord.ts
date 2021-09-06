@@ -14,8 +14,6 @@ export const getProfile = async (
   return user;
 };
 
-//const USE_LOCAL = false;
-const USE_LOCAL = true;
 
 export const getAccessToken = async (code: string) => {
   const body = {
