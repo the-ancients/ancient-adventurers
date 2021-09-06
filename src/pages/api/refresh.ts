@@ -3,7 +3,6 @@ import {
   addRoleForUser,
   AdminRoleID,
   getRolesForUser,
-  removeFromServer,
   removeRoleForUser,
   RolesToIDs
 } from '@server/services/Discord';
