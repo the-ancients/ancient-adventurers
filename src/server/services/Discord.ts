@@ -157,6 +157,9 @@ export const RolesToIDs: Record<string, string> = {
   'Ancient Helm of Rage': '884488031275462656'
 };
 
+// Guardian of the Realm
 export const AdminRoleID = '882448562758246451';
+// Builder
 export const BuilderRoleID = '884143420266938481';
+// Ancient
 export const flexRoleID = '881897843198132255';
