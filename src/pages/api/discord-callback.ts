@@ -23,6 +23,7 @@ const api = async (req: NextApiRequest, res: NextApiResponse) => {
   const filteredBags = bags.filter(bag =>
     bag.head.toLowerCase().includes('ancient')
   );
+  
   if (!filteredBags.length) return res.redirect('/unauthorized');
 
   await prisma.user.update({
